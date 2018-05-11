@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">  clap </span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">h.hat</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">kick</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">o.hat</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">boom</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">snar</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">ride</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">tom</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">tink</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/chipnoises/clap_nes.wav"></audio>
+  <audio data-key="83" src="sounds/chipnoises/hat_nes-03-15.wav"></audio>
+  <audio data-key="68" src="sounds/chipnoises/kick_nes-02-01.wav"></audio>
+  <audio data-key="70" src="sounds/chipnoises/openhat_nes-04-13.wav"></audio>
+  <audio data-key="71" src="sounds/chipnoises/boom_nes-13-00.wav"></audio>
+  <audio data-key="72" src="sounds/chipnoises/snare_nes-11-14.wav"></audio>
+  <audio data-key="74" src="sounds/chipnoises/ride_nes-13-02.wav"></audio>
+  <audio data-key="75" src="sounds/chipnoises/tom_nes-10-13.wav"></audio>
+  <audio data-key="76" src="sounds/chipnoises/tink_nes.wav"></audio>
+
+<script>
+
+	function playSound(e){
+	
+		const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+		const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+
+		if(!audio)return; //stops function altogether
+		
+		
+		audio.currentTime=0; //Starts audio at time stated
+		
+		audio.play();
+		
+		key.classList.add("playing");
+		
+		setTimeout(function(){
+	
+			key.classList.remove("playing");
+	
+			}, 70);
+	}
+	
+	
+	
+	/*function removeTransition(e){
+	
+		if(e.propertyName !== "transform") return;
+		
+		console.log(e.propertyName);
+		
+		this.classList.remove("playing");
+	
+	}
+	
+	const keys= document.querySelectorAll(".key"); //creates node list of item with a class of key
+	
+	keys.forEach(key=>key.addEventListener("transitionend",removeTransition)); */
+
+	window.addEventListener("keydown", playSound);
+	
+</script>
+
+
+</body>
+</html>
